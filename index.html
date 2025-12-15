@@ -707,292 +707,297 @@
     </footer>
   </main>
 
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    // Smooth scrolling for in-page anchors
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', (e) => {
-        const id = a.getAttribute('href');
-        if (!id || id === '#') return;
-        const el = document.querySelector(id);
-        if (!el) return;
-        e.preventDefault();
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        history.pushState(null, '', id);
-      });
-    });
-
-    // Tiny toast
-    let toastTimer;
-    function toast(msg){
-      clearTimeout(toastTimer);
-      let el = document.getElementById('toast');
-      if(!el){
-        el = document.createElement('div');
-        el.id = 'toast';
-        el.style.position = 'fixed';
-        el.style.left = '50%';
-        el.style.bottom = '18px';
-        el.style.transform = 'translateX(-50%)';
-        el.style.padding = '10px 12px';
-        el.style.borderRadius = '999px';
-        el.style.border = '1px solid rgba(35,18,26,.16)';
-        el.style.background = 'rgba(255,255,255,.88)';
-        el.style.color = '#23121a';
-        el.style.font = '900 13px ui-sans-serif, system-ui';
-        el.style.backdropFilter = 'blur(10px)';
-        el.style.zIndex = '9999';
-        document.body.appendChild(el);
-      }
-      el.textContent = msg;
-      el.style.opacity = '1';
-      toastTimer = setTimeout(() => { el.style.opacity = '0'; }, 1400);
-    }
-
-    // Footer year
-    const yearEl = document.getElementById('year');
-    if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-    // Language toggle (EN / KR)
-    const i18n = {
-      en: {
-        nav_about: "About",
-        nav_videos: "Videos",
-        nav_rates: "Rates",
-        nav_contact: "Contact",
-        nav_book: "Book a collab 💗",
-
-        pill_location_label: "Based in:",
-        pill_location_val: "South Korea",
-        pill_platforms_label: "Platforms:",
-        pill_platforms_val: "TikTok + Instagram",
-        pill_lang_label: "Languages:",
-        pill_lang_val: "English / Korean",
-
-        hero_title: "Meet Sini 💗",
-        hero_lead: "Hi! I’m Sini — a 21-year-old TikTok & Instagram creator based in South Korea. I post high-energy dance content with a cute beauty vibe, and I can also do cosplay-style concepts when it fits the campaign.",
-
-        cta_videos: "See featured videos ✨",
-        cta_rates: "View rates",
-        cta_email: "Email",
-
-        profile_role: "TikTok + Instagram Creator",
-        profile_based_label: "Based in:",
-        profile_based_val: "South Korea",
-        profile_lang_label: "Languages:",
-        profile_lang_val: "English / Korean",
-
-        stat_total: "Total followers (TT + IG)",
-        stat_er: "TikTok engagement rate",
-        stat_views: "Avg views (recent TT)",
-        stat_tt_followers: "TikTok followers",
-
-        photos_title: "Photos",
-        photos_sub: "Clean visuals for beauty, fashion, dance, and (optional) cosplay-inspired concepts.",
-        photos_tag: "cute + clean",
-        cap_night: "✨ Night / aesthetic",
-        cap_cos: "🎀 Cosplay / beauty vibe",
-
-        about_title: "About",
-        about_sub: "Short-form content made for music, clothing, beauty, and lifestyle brands.",
-
-        get_title: "What you get",
-        get_1: "Trend-led dance content with strong hooks",
-        get_2: "Clean, girly visuals + editing that fits trends",
-        get_3: "Optional cosplay-inspired concepts (when relevant)",
-        get_4: "Clear CTA options: save / share / comment / click",
-
-        fit_title: "Best fits",
-        fit_1: "Music releases & dance challenges",
-        fit_2: "Clothing / fashion accessories",
-        fit_3: "Beauty products, skincare, makeup",
-
-        vid_title: "Featured videos",
-        vid_sub: "Two embeds to keep the page fast.",
-        vid_1: "✨ Featured TikTok #1",
-        vid_2: "🫧 Featured TikTok #2",
-        watch_tt: "Watch on TikTok",
-
-        rates_title: "Rates",
-        rates_sub: "Starting ranges for smaller collabs. Final pricing depends on deliverables + usage rights.",
-        rate_1_title: "Sponsored TikTok (1 video)",
-        rate_1_desc: "1× TikTok (15–45s), concept + choreography, captions, 1 revision round.",
-        rate_2_title: "UGC for brand channels",
-        rate_2_desc: "2–5 videos delivered for your brand to post (creation fee). Bundle pricing available.",
-        rate_3_title: "Instagram add-on",
-        rate_3_desc: "1× Reel or 3–5 Stories to support a TikTok campaign.",
-        tag_awareness: "Awareness",
-        tag_perf: "Performance",
-        tag_launch: "Launch support",
-
-        addons_title: "Add-ons",
-        addon_1: "<strong style=\"color:var(--text)\">Spark Ads / whitelisting:</strong> +€80–€250",
-        addon_2: "<strong style=\"color:var(--text)\">Paid usage rights (30–90 days):</strong> +15–45%",
-        addon_3: "<strong style=\"color:var(--text)\">Rush delivery (48h):</strong> +€80–€220",
-        addon_4: "<strong style=\"color:var(--text)\">Cosplay concept / styling:</strong> ask for quote (depends on outfit/props)",
-
-        contact_title: "Contact",
-        contact_sub: "Best contact: email. For quick checks, DM on TikTok/Instagram.",
-        contact_email_btn: "Email Sini 💌",
-        contact_ttdm: "TikTok DM",
-        contact_igdm: "Instagram DM",
-        label_email: "Email:",
-        label_mediakit: "Media kit:",
-        copy_btn: "Copy",
-        back_top: "↑ Top"
-      },
-
-      kr: {
-        nav_about: "소개",
-        nav_videos: "영상",
-        nav_rates: "단가",
-        nav_contact: "연락",
-        nav_book: "콜라보 문의 💗",
-
-        pill_location_label: "활동 지역:",
-        pill_location_val: "대한민국",
-        pill_platforms_label: "플랫폼:",
-        pill_platforms_val: "틱톡 + 인스타그램",
-        pill_lang_label: "언어:",
-        pill_lang_val: "영어 / 한국어",
-
-        hero_title: "시니를 소개합니다 💗",
-        hero_lead: "안녕하세요! 저는 대한민국에서 활동하는 21살 크리에이터 시니입니다. 틱톡과 인스타그램에서 고에너지 댄스 콘텐츠를 만들고, 뷰티 무드와 러블리한 분위기를 살려요. 캠페인에 맞는 경우 코스프레 컨셉도 가능합니다.",
-
-        cta_videos: "대표 영상 보기 ✨",
-        cta_rates: "단가 보기",
-        cta_email: "이메일",
-
-        profile_role: "틱톡 + 인스타그램 크리에이터",
-        profile_based_label: "활동 지역:",
-        profile_based_val: "대한민국",
-        profile_lang_label: "언어:",
-        profile_lang_val: "영어 / 한국어",
-
-        stat_total: "총 팔로워 (TT + IG)",
-        stat_er: "틱톡 참여율",
-        stat_views: "최근 평균 조회수",
-        stat_tt_followers: "틱톡 팔로워",
-
-        photos_title: "사진",
-        photos_sub: "뷰티·패션·댄스, (옵션) 코스프레 컨셉까지 깔끔한 비주얼.",
-        photos_tag: "깔끔 + 러블리",
-        cap_night: "✨ 야간 / 무드",
-        cap_cos: "🎀 코스프레 / 뷰티 무드",
-
-        about_title: "소개",
-        about_sub: "음원, 의류/패션, 뷰티, 라이프스타일 브랜드에 맞춘 숏폼 콘텐츠.",
-
-        get_title: "제공 내용",
-        get_1: "트렌드에 맞는 댄스 콘텐츠 + 강한 훅",
-        get_2: "깔끔한 비주얼 + 트렌드 편집",
-        get_3: "캠페인에 맞는 코스프레 컨셉(옵션)",
-        get_4: "저장/공유/댓글/클릭 유도 CTA",
-
-        fit_title: "추천 카테고리",
-        fit_1: "음원 발매 & 댄스 챌린지",
-        fit_2: "의류/패션 소품",
-        fit_3: "뷰티 제품, 스킨케어, 메이크업",
-
-        vid_title: "대표 영상",
-        vid_sub: "빠른 로딩을 위해 2개만 임베드했습니다.",
-        vid_1: "✨ 대표 틱톡 #1",
-        vid_2: "🫧 대표 틱톡 #2",
-        watch_tt: "틱톡에서 보기",
-
-        rates_title: "단가",
-        rates_sub: "소규모 협업 기준 시작 단가입니다. 구성/사용권에 따라 변동됩니다.",
-        rate_1_title: "틱톡 협찬 (영상 1개)",
-        rate_1_desc: "틱톡 1개(15–45초), 컨셉+안무, 캡션, 수정 1회.",
-        rate_2_title: "브랜드 채널용 UGC",
-        rate_2_desc: "브랜드 업로드용 2–5개 제작(제작비). 번들 가능.",
-        rate_3_title: "인스타 추가",
-        rate_3_desc: "릴스 1개 또는 스토리 3–5개.",
-        tag_awareness: "인지",
-        tag_perf: "성과",
-        tag_launch: "런칭",
-
-        addons_title: "추가 옵션",
-        addon_1: "<strong style=\"color:var(--text)\">스파크 애즈/화이트리스트:</strong> +€80–€250",
-        addon_2: "<strong style=\"color:var(--text)\">유료 사용권(30–90일):</strong> +15–45%",
-        addon_3: "<strong style=\"color:var(--text)\">급행(48시간):</strong> +€80–€220",
-        addon_4: "<strong style=\"color:var(--text)\">코스프레 컨셉/스타일링:</strong> 별도 견적(의상/소품에 따라)",
-
-        contact_title: "연락",
-        contact_sub: "가장 빠른 방법: 이메일. 간단 확인은 DM도 가능합니다.",
-        contact_email_btn: "이메일 보내기 💌",
-        contact_ttdm: "틱톡 DM",
-        contact_igdm: "인스타 DM",
-        label_email: "이메일:",
-        label_mediakit: "미디어킷:",
-        copy_btn: "복사",
-        back_top: "↑ 위로"
-      }
-    };
-
-    let currentLang = 'en';
-
-    function setLang(lang){
-      currentLang = lang;
-      const dict = i18n[lang];
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if(!dict[key]) return;
-        if (dict[key].includes('<strong')) el.innerHTML = dict[key];
-        else el.textContent = dict[key];
+  <!-- ✅ FIXED SCRIPT: wraps everything in DOMContentLoaded + guards IDs -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Smooth scrolling for in-page anchors
+      document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', (e) => {
+          const id = a.getAttribute('href');
+          if (!id || id === '#') return;
+          const el = document.querySelector(id);
+          if (!el) return;
+          e.preventDefault();
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          history.pushState(null, '', id);
+        });
       });
 
+      // Tiny toast
+      let toastTimer;
+      function toast(msg){
+        clearTimeout(toastTimer);
+        let el = document.getElementById('toast');
+        if(!el){
+          el = document.createElement('div');
+          el.id = 'toast';
+          el.style.position = 'fixed';
+          el.style.left = '50%';
+          el.style.bottom = '18px';
+          el.style.transform = 'translateX(-50%)';
+          el.style.padding = '10px 12px';
+          el.style.borderRadius = '999px';
+          el.style.border = '1px solid rgba(35,18,26,.16)';
+          el.style.background = 'rgba(255,255,255,.88)';
+          el.style.color = '#23121a';
+          el.style.font = '900 13px ui-sans-serif, system-ui';
+          el.style.backdropFilter = 'blur(10px)';
+          el.style.zIndex = '9999';
+          document.body.appendChild(el);
+        }
+        el.textContent = msg;
+        el.style.opacity = '1';
+        toastTimer = setTimeout(() => { el.style.opacity = '0'; }, 1400);
+      }
+
+      // Footer year
+      const yearEl = document.getElementById('year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      // Language toggle (EN / KR)
+      const i18n = {
+        en: {
+          nav_about: "About",
+          nav_videos: "Videos",
+          nav_rates: "Rates",
+          nav_contact: "Contact",
+          nav_book: "Book a collab 💗",
+
+          pill_location_label: "Based in:",
+          pill_location_val: "South Korea",
+          pill_platforms_label: "Platforms:",
+          pill_platforms_val: "TikTok + Instagram",
+          pill_lang_label: "Languages:",
+          pill_lang_val: "English / Korean",
+
+          hero_title: "Meet Sini 💗",
+          hero_lead: "Hi! I’m Sini — a 21-year-old TikTok & Instagram creator based in South Korea. I post high-energy dance content with a cute beauty vibe, and I can also do cosplay-style concepts when it fits the campaign.",
+
+          cta_videos: "See featured videos ✨",
+          cta_rates: "View rates",
+          cta_email: "Email",
+
+          profile_role: "TikTok + Instagram Creator",
+          profile_based_label: "Based in:",
+          profile_based_val: "South Korea",
+          profile_lang_label: "Languages:",
+          profile_lang_val: "English / Korean",
+
+          stat_total: "Total followers (TT + IG)",
+          stat_er: "TikTok engagement rate",
+          stat_views: "Avg views (recent TT)",
+          stat_tt_followers: "TikTok followers",
+
+          photos_title: "Photos",
+          photos_sub: "Clean visuals for beauty, fashion, dance, and (optional) cosplay-inspired concepts.",
+          photos_tag: "cute + clean",
+          cap_night: "✨ Night / aesthetic",
+          cap_cos: "🎀 Cosplay / beauty vibe",
+
+          about_title: "About",
+          about_sub: "Short-form content made for music, clothing, beauty, and lifestyle brands.",
+
+          get_title: "What you get",
+          get_1: "Trend-led dance content with strong hooks",
+          get_2: "Clean, girly visuals + editing that fits trends",
+          get_3: "Optional cosplay-inspired concepts (when relevant)",
+          get_4: "Clear CTA options: save / share / comment / click",
+
+          fit_title: "Best fits",
+          fit_1: "Music releases & dance challenges",
+          fit_2: "Clothing / fashion accessories",
+          fit_3: "Beauty products, skincare, makeup",
+
+          vid_title: "Featured videos",
+          vid_sub: "Two embeds to keep the page fast.",
+          vid_1: "✨ Featured TikTok #1",
+          vid_2: "🫧 Featured TikTok #2",
+          watch_tt: "Watch on TikTok",
+
+          rates_title: "Rates",
+          rates_sub: "Starting ranges for smaller collabs. Final pricing depends on deliverables + usage rights.",
+          rate_1_title: "Sponsored TikTok (1 video)",
+          rate_1_desc: "1× TikTok (15–45s), concept + choreography, captions, 1 revision round.",
+          rate_2_title: "UGC for brand channels",
+          rate_2_desc: "2–5 videos delivered for your brand to post (creation fee). Bundle pricing available.",
+          rate_3_title: "Instagram add-on",
+          rate_3_desc: "1× Reel or 3–5 Stories to support a TikTok campaign.",
+          tag_awareness: "Awareness",
+          tag_perf: "Performance",
+          tag_launch: "Launch support",
+
+          addons_title: "Add-ons",
+          addon_1: "<strong style=\"color:var(--text)\">Spark Ads / whitelisting:</strong> +€80–€250",
+          addon_2: "<strong style=\"color:var(--text)\">Paid usage rights (30–90 days):</strong> +15–45%",
+          addon_3: "<strong style=\"color:var(--text)\">Rush delivery (48h):</strong> +€80–€220",
+          addon_4: "<strong style=\"color:var(--text)\">Cosplay concept / styling:</strong> ask for quote (depends on outfit/props)",
+
+          contact_title: "Contact",
+          contact_sub: "Best contact: email. For quick checks, DM on TikTok/Instagram.",
+          contact_email_btn: "Email Sini 💌",
+          contact_ttdm: "TikTok DM",
+          contact_igdm: "Instagram DM",
+          label_email: "Email:",
+          label_mediakit: "Media kit:",
+          copy_btn: "Copy",
+          back_top: "↑ Top"
+        },
+
+        kr: {
+          nav_about: "소개",
+          nav_videos: "영상",
+          nav_rates: "단가",
+          nav_contact: "연락",
+          nav_book: "콜라보 문의 💗",
+
+          pill_location_label: "활동 지역:",
+          pill_location_val: "대한민국",
+          pill_platforms_label: "플랫폼:",
+          pill_platforms_val: "틱톡 + 인스타그램",
+          pill_lang_label: "언어:",
+          pill_lang_val: "영어 / 한국어",
+
+          hero_title: "시니를 소개합니다 💗",
+          hero_lead: "안녕하세요! 저는 대한민국에서 활동하는 21살 크리에이터 시니입니다. 틱톡과 인스타그램에서 고에너지 댄스 콘텐츠를 만들고, 뷰티 무드와 러블리한 분위기를 살려요. 캠페인에 맞는 경우 코스프레 컨셉도 가능합니다.",
+
+          cta_videos: "대표 영상 보기 ✨",
+          cta_rates: "단가 보기",
+          cta_email: "이메일",
+
+          profile_role: "틱톡 + 인스타그램 크리에이터",
+          profile_based_label: "활동 지역:",
+          profile_based_val: "대한민국",
+          profile_lang_label: "언어:",
+          profile_lang_val: "영어 / 한국어",
+
+          stat_total: "총 팔로워 (TT + IG)",
+          stat_er: "틱톡 참여율",
+          stat_views: "최근 평균 조회수",
+          stat_tt_followers: "틱톡 팔로워",
+
+          photos_title: "사진",
+          photos_sub: "뷰티·패션·댄스, (옵션) 코스프레 컨셉까지 깔끔한 비주얼.",
+          photos_tag: "깔끔 + 러블리",
+          cap_night: "✨ 야간 / 무드",
+          cap_cos: "🎀 코스프레 / 뷰티 무드",
+
+          about_title: "소개",
+          about_sub: "음원, 의류/패션, 뷰티, 라이프스타일 브랜드에 맞춘 숏폼 콘텐츠.",
+
+          get_title: "제공 내용",
+          get_1: "트렌드에 맞는 댄스 콘텐츠 + 강한 훅",
+          get_2: "깔끔한 비주얼 + 트렌드 편집",
+          get_3: "캠페인에 맞는 코스프레 컨셉(옵션)",
+          get_4: "저장/공유/댓글/클릭 유도 CTA",
+
+          fit_title: "추천 카테고리",
+          fit_1: "음원 발매 & 댄스 챌린지",
+          fit_2: "의류/패션 소품",
+          fit_3: "뷰티 제품, 스킨케어, 메이크업",
+
+          vid_title: "대표 영상",
+          vid_sub: "빠른 로딩을 위해 2개만 임베드했습니다.",
+          vid_1: "✨ 대표 틱톡 #1",
+          vid_2: "🫧 대표 틱톡 #2",
+          watch_tt: "틱톡에서 보기",
+
+          rates_title: "단가",
+          rates_sub: "소규모 협업 기준 시작 단가입니다. 구성/사용권에 따라 변동됩니다.",
+          rate_1_title: "틱톡 협찬 (영상 1개)",
+          rate_1_desc: "틱톡 1개(15–45초), 컨셉+안무, 캡션, 수정 1회.",
+          rate_2_title: "브랜드 채널용 UGC",
+          rate_2_desc: "브랜드 업로드용 2–5개 제작(제작비). 번들 가능.",
+          rate_3_title: "인스타 추가",
+          rate_3_desc: "릴스 1개 또는 스토리 3–5개.",
+          tag_awareness: "인지",
+          tag_perf: "성과",
+          tag_launch: "런칭",
+
+          addons_title: "추가 옵션",
+          addon_1: "<strong style=\"color:var(--text)\">스파크 애즈/화이트리스트:</strong> +€80–€250",
+          addon_2: "<strong style=\"color:var(--text)\">유료 사용권(30–90일):</strong> +15–45%",
+          addon_3: "<strong style=\"color:var(--text)\">급행(48시간):</strong> +€80–€220",
+          addon_4: "<strong style=\"color:var(--text)\">코스프레 컨셉/스타일링:</strong> 별도 견적(의상/소품에 따라)",
+
+          contact_title: "연락",
+          contact_sub: "가장 빠른 방법: 이메일. 간단 확인은 DM도 가능합니다.",
+          contact_email_btn: "이메일 보내기 💌",
+          contact_ttdm: "틱톡 DM",
+          contact_igdm: "인스타 DM",
+          label_email: "이메일:",
+          label_mediakit: "미디어킷:",
+          copy_btn: "복사",
+          back_top: "↑ 위로"
+        }
+      };
+
+      let currentLang = 'en';
+
+      function setLang(lang){
+        currentLang = lang;
+        const dict = i18n[lang];
+
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+          const key = el.getAttribute('data-i18n');
+          if(!dict[key]) return;
+
+          // For addon items with <strong>
+          if (dict[key].includes('<strong')) el.innerHTML = dict[key];
+          else el.textContent = dict[key];
+        });
+
+        const enBtn = document.getElementById('langEN');
+        const krBtn = document.getElementById('langKR');
+        if (enBtn) enBtn.setAttribute('aria-pressed', String(lang === 'en'));
+        if (krBtn) krBtn.setAttribute('aria-pressed', String(lang === 'kr'));
+        document.documentElement.lang = (lang === 'kr' ? 'ko' : 'en');
+      }
+
+      // ✅ THIS is the KR/EN fix: ensure buttons exist + bind after DOM is ready
       const enBtn = document.getElementById('langEN');
       const krBtn = document.getElementById('langKR');
-      if (enBtn) enBtn.setAttribute('aria-pressed', String(lang === 'en'));
-      if (krBtn) krBtn.setAttribute('aria-pressed', String(lang === 'kr'));
-      document.documentElement.lang = (lang === 'kr' ? 'ko' : 'en');
-    }
+      if (enBtn) enBtn.addEventListener('click', () => setLang('en'));
+      if (krBtn) krBtn.addEventListener('click', () => setLang('kr'));
 
-    const enBtn = document.getElementById('langEN');
-    const krBtn = document.getElementById('langKR');
-    if (enBtn) enBtn.addEventListener('click', () => setLang('en'));
-    if (krBtn) krBtn.addEventListener('click', () => setLang('kr'));
-
-    // Copy buttons (guard if missing)
-    async function copyText(text){
-      try{
-        await navigator.clipboard.writeText(text);
-        toast(currentLang === 'kr' ? '복사됨 💗' : 'Copied 💗');
-      }catch(err){
-        const t = document.createElement('textarea');
-        t.value = text;
-        t.setAttribute('readonly','');
-        t.style.position = 'absolute';
-        t.style.left = '-9999px';
-        document.body.appendChild(t);
-        t.select();
-        document.execCommand('copy');
-        document.body.removeChild(t);
-        toast(currentLang === 'kr' ? '복사됨 💗' : 'Copied 💗');
+      // Copy buttons
+      async function copyText(text){
+        try{
+          await navigator.clipboard.writeText(text);
+          toast(currentLang === 'kr' ? '복사됨 💗' : 'Copied 💗');
+        }catch(err){
+          const t = document.createElement('textarea');
+          t.value = text;
+          t.setAttribute('readonly','');
+          t.style.position = 'absolute';
+          t.style.left = '-9999px';
+          document.body.appendChild(t);
+          t.select();
+          document.execCommand('copy');
+          document.body.removeChild(t);
+          toast(currentLang === 'kr' ? '복사됨 💗' : 'Copied 💗');
+        }
       }
-    }
 
-    const copyEmailBtn = document.getElementById('copyEmailBtn');
-    const copyUrlBtn = document.getElementById('copyUrlBtn');
-    if (copyEmailBtn) {
-      copyEmailBtn.addEventListener('click', () => {
-        const emailEl = document.getElementById('emailText');
-        if (emailEl) copyText(emailEl.textContent.trim());
-      });
-    }
-    if (copyUrlBtn) {
-      copyUrlBtn.addEventListener('click', () => {
-        const linkEl = document.getElementById('linkText');
-        if (linkEl) copyText(linkEl.textContent.trim());
-      });
-    }
+      const copyEmailBtn = document.getElementById('copyEmailBtn');
+      const copyUrlBtn = document.getElementById('copyUrlBtn');
 
-    // default
-    setLang('en');
-  });
-</script>
+      if (copyEmailBtn) {
+        copyEmailBtn.addEventListener('click', () => {
+          const emailEl = document.getElementById('emailText');
+          if (emailEl) copyText(emailEl.textContent.trim());
+        });
+      }
 
+      if (copyUrlBtn) {
+        copyUrlBtn.addEventListener('click', () => {
+          const linkEl = document.getElementById('linkText');
+          if (linkEl) copyText(linkEl.textContent.trim());
+        });
+      }
+
+      // default
+      setLang('en');
+    });
+  </script>
 </body>
 </html>
-
