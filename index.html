@@ -707,7 +707,8 @@
     </footer>
   </main>
 
-  <script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
     // Smooth scrolling for in-page anchors
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', (e) => {
@@ -719,33 +720,6 @@
         el.scrollIntoView({ behavior: 'smooth', block: 'start' });
         history.pushState(null, '', id);
       });
-    });
-
-    // Copy helpers
-    async function copyText(text){
-      try{
-        await navigator.clipboard.writeText(text);
-        toast(currentLang === 'kr' ? '복사됨 💗' : 'Copied 💗');
-      }catch(err){
-        const t = document.createElement('textarea');
-        t.value = text;
-        t.setAttribute('readonly','');
-        t.style.position = 'absolute';
-        t.style.left = '-9999px';
-        document.body.appendChild(t);
-        t.select();
-        document.execCommand('copy');
-        document.body.removeChild(t);
-        toast(currentLang === 'kr' ? '복사됨 💗' : 'Copied 💗');
-      }
-    }
-
-    document.getElementById('copyEmailBtn').addEventListener('click', () => {
-      copyText(document.getElementById('emailText').textContent.trim());
-    });
-
-    document.getElementById('copyUrlBtn').addEventListener('click', () => {
-      copyText(document.getElementById('linkText').textContent.trim());
     });
 
     // Tiny toast
@@ -776,7 +750,8 @@
     }
 
     // Footer year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
 
     // Language toggle (EN / KR)
     const i18n = {
@@ -963,20 +938,23 @@
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if(!dict[key]) return;
-
         if (dict[key].includes('<strong')) el.innerHTML = dict[key];
         else el.textContent = dict[key];
       });
 
-      document.getElementById('langEN').setAttribute('aria-pressed', String(lang === 'en'));
-      document.getElementById('langKR').setAttribute('aria-pressed', String(lang === 'kr'));
+      const enBtn = document.getElementById('langEN');
+      const krBtn = document.getElementById('langKR');
+      if (enBtn) enBtn.setAttribute('aria-pressed', String(lang === 'en'));
+      if (krBtn) krBtn.setAttribute('aria-pressed', String(lang === 'kr'));
       document.documentElement.lang = (lang === 'kr' ? 'ko' : 'en');
     }
 
-    document.getElementById('langEN').addEventListener('click', () => setLang('en'));
-    document.getElementById('langKR').addEventListener('click', () => setLang('kr'));
+    const enBtn = document.getElementById('langEN');
+    const krBtn = document.getElementById('langKR');
+    if (enBtn) enBtn.addEventListener('click', () => setLang('en'));
+    if (krBtn) krBtn.addEventListener('click', () => setLang('kr'));
 
-    // Copy buttons
+    // Copy buttons (guard if missing)
     async function copyText(text){
       try{
         await navigator.clipboard.writeText(text);
@@ -994,43 +972,27 @@
         toast(currentLang === 'kr' ? '복사됨 💗' : 'Copied 💗');
       }
     }
-    document.getElementById('copyEmailBtn').addEventListener('click', () => {
-      copyText(document.getElementById('emailText').textContent.trim());
-    });
-    document.getElementById('copyUrlBtn').addEventListener('click', () => {
-      copyText(document.getElementById('linkText').textContent.trim());
-    });
 
-    // Tiny toast
-    let toastTimer;
-    function toast(msg){
-      clearTimeout(toastTimer);
-      let el = document.getElementById('toast');
-      if(!el){
-        el = document.createElement('div');
-        el.id = 'toast';
-        el.style.position = 'fixed';
-        el.style.left = '50%';
-        el.style.bottom = '18px';
-        el.style.transform = 'translateX(-50%)';
-        el.style.padding = '10px 12px';
-        el.style.borderRadius = '999px';
-        el.style.border = '1px solid rgba(35,18,26,.16)';
-        el.style.background = 'rgba(255,255,255,.88)';
-        el.style.color = '#23121a';
-        el.style.font = '900 13px ui-sans-serif, system-ui';
-        el.style.backdropFilter = 'blur(10px)';
-        el.style.zIndex = '9999';
-        document.body.appendChild(el);
-      }
-      el.textContent = msg;
-      el.style.opacity = '1';
-      toastTimer = setTimeout(() => { el.style.opacity = '0'; }, 1400);
+    const copyEmailBtn = document.getElementById('copyEmailBtn');
+    const copyUrlBtn = document.getElementById('copyUrlBtn');
+    if (copyEmailBtn) {
+      copyEmailBtn.addEventListener('click', () => {
+        const emailEl = document.getElementById('emailText');
+        if (emailEl) copyText(emailEl.textContent.trim());
+      });
+    }
+    if (copyUrlBtn) {
+      copyUrlBtn.addEventListener('click', () => {
+        const linkEl = document.getElementById('linkText');
+        if (linkEl) copyText(linkEl.textContent.trim());
+      });
     }
 
-    // Footer year + default lang
-    document.getElementById('year').textContent = new Date().getFullYear();
+    // default
     setLang('en');
-  </script>
+  });
+</script>
+
 </body>
 </html>
+
