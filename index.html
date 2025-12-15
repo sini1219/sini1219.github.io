@@ -42,7 +42,7 @@
     a{color:inherit; text-decoration:none}
     .wrap{max-width:var(--max); margin:0 auto; padding:24px; position:relative; z-index:1}
 
-    /* hearts/sparkles (visible but light) */
+    /* hearts/sparkles */
     .floaties{
       position:fixed;
       inset:0;
@@ -91,6 +91,7 @@
     .brand span{font-size:13px; color:var(--muted)}
 
     .nav-links{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; align-items:center}
+
     .chip{
       display:inline-flex; align-items:center; gap:8px;
       padding:8px 12px;
@@ -169,6 +170,8 @@
     @media (max-width: 920px){ .grid{grid-template-columns:1fr} }
 
     .hero-main{padding:22px 22px 18px}
+
+    /* fewer pills = cleaner on mobile */
     .kicker{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:12px}
     .pill{
       padding:6px 10px;
@@ -272,20 +275,18 @@
       border:1px solid rgba(255,79,163,.18);
       background: rgba(255,255,255,.7);
       position:relative;
-
-      /* performance: defer offscreen rendering */
       content-visibility:auto;
-      contain-intrinsic-size: 340px 260px;
+      contain-intrinsic-size: 320px 260px;
     }
     .shot img{
       width:100%;
       height:100%;
       display:block;
       object-fit:cover;
-      max-height: 360px; /* limit paint cost */
+      max-height: 340px;
     }
     @media (max-width: 920px){
-      .shot img{max-height: 320px;}
+      .shot img{max-height: 300px;}
     }
 
     .shot .cap{
@@ -333,6 +334,50 @@
     .brand-meta b{display:block; font-size:14px}
     .brand-meta span{display:block; color:var(--muted); font-size:12px; margin-top:2px}
     .brand-actions{margin-left:auto; display:flex; gap:8px; flex-wrap:wrap}
+
+    /* Rates (FIX MOBILE WRAP) */
+    .services{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    @media (max-width: 920px){
+      .services{grid-template-columns:1fr}
+    }
+    .service{padding:18px}
+    .service h4{
+      margin:0 0 8px;
+      font-size:15px;
+      line-height:1.25;
+      word-break:keep-all;
+    }
+    .service p{
+      margin:0 0 12px;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.45;
+    }
+    .service .price{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      margin-top:10px;
+      flex-wrap:wrap; /* <-- key fix */
+    }
+    .service .price strong{
+      font-size:14px;
+      white-space:nowrap;
+    }
+    .tag{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px dashed rgba(139,92,246,.25);
+      color:var(--muted);
+      background:rgba(255,255,255,.72);
+      white-space:nowrap;
+    }
 
     /* Video embeds */
     .video-grid{display:grid; grid-template-columns: repeat(2, 1fr); gap:14px; padding:18px}
@@ -391,10 +436,9 @@
         </div>
       </div>
 
+      <!-- SIMPLIFIED NAV -->
       <div class="nav-links">
         <a class="chip" href="#about" data-i18n="nav_about">About</a>
-        <a class="chip" href="#audience" data-i18n="nav_audience">Audience</a>
-        <a class="chip" href="#work" data-i18n="nav_work">Work</a>
         <a class="chip" href="#videos" data-i18n="nav_videos">Videos</a>
         <a class="chip" href="#services" data-i18n="nav_rates">Rates</a>
         <a class="chip" href="#contact" data-i18n="nav_contact">Contact</a>
@@ -402,7 +446,6 @@
         <a class="chip" href="https://www.tiktok.com/@sini_1219" target="_blank" rel="noreferrer">TikTok</a>
         <a class="chip" href="https://www.instagram.com/sini_1219/" target="_blank" rel="noreferrer">Instagram</a>
 
-        <!-- Language toggle -->
         <button class="btn lang secondary" id="langEN" type="button" aria-pressed="true">EN</button>
         <button class="btn lang secondary" id="langKR" type="button" aria-pressed="false">KR</button>
 
@@ -416,17 +459,17 @@
       <div class="grid">
         <div class="card hero-main">
 
+          <!-- FEWER TAGS -->
           <div class="kicker">
-            <span class="pill"><strong data-i18n="pill_niche_label">Niche:</strong> <span data-i18n="pill_niche_val">Dance / Performance / Beauty</span></span>
-            <span class="pill"><strong data-i18n="pill_plus_label">Plus:</strong> <span data-i18n="pill_plus_val">Cosplay-style looks (optional)</span></span>
             <span class="pill"><strong data-i18n="pill_location_label">Based in:</strong> <span data-i18n="pill_location_val">South Korea</span></span>
             <span class="pill"><strong data-i18n="pill_platforms_label">Platforms:</strong> <span data-i18n="pill_platforms_val">TikTok + Instagram</span></span>
+            <span class="pill"><strong data-i18n="pill_lang_label">Languages:</strong> <span data-i18n="pill_lang_val">English / Korean</span></span>
           </div>
 
-          <h1 data-i18n="hero_title">Dance-first content brands can’t ignore.</h1>
+          <h1 data-i18n="hero_title">Meet Sini 💗</h1>
           <p class="lead" data-i18n="hero_lead">
-            Sini creates high-energy dance content with a cute beauty/lifestyle edge — designed for saves, shares,
-            strong hooks, and brand recall. Cosplay-inspired concepts available when it fits the campaign.
+            Hi! I’m Sini — a 21-year-old TikTok & Instagram creator based in South Korea.
+            I post high-energy dance content with a cute beauty vibe, and I can also do cosplay-style concepts when it fits the campaign.
           </p>
 
           <div class="cta-row">
@@ -443,7 +486,7 @@
               <h2>Sini</h2>
               <p data-i18n="profile_role">TikTok + Instagram Creator</p>
               <p><span style="color:var(--text); font-weight:900" data-i18n="profile_based_label">Based in:</span> <span data-i18n="profile_based_val">South Korea</span></p>
-              <p><span style="color:var(--text); font-weight:900" data-i18n="profile_reply_label">Reply in:</span> <span data-i18n="profile_reply_val">&lt; 24 hours</span></p>
+              <p><span style="color:var(--text); font-weight:900" data-i18n="profile_lang_label">Languages:</span> <span data-i18n="profile_lang_val">English / Korean</span></p>
             </div>
           </div>
 
@@ -503,7 +546,7 @@
       <div class="section-head">
         <div>
           <h3 data-i18n="about_title">About</h3>
-          <p data-i18n="about_sub">Dance-led short-form with strong hooks, cute styling, and trend-aware choreography.</p>
+          <p data-i18n="about_sub">Short-form content made for music, clothing, beauty, and lifestyle brands.</p>
         </div>
       </div>
 
@@ -511,7 +554,7 @@
         <div class="card list">
           <h4 data-i18n="get_title">What you get</h4>
           <ul>
-            <li data-i18n="get_1">Native TikTok-style storytelling + choreography</li>
+            <li data-i18n="get_1">Trend-led dance content with strong hooks</li>
             <li data-i18n="get_2">Clean, girly visuals + editing that fits trends</li>
             <li data-i18n="get_3">Optional cosplay-inspired concepts (when relevant)</li>
             <li data-i18n="get_4">Clear CTA options: save / share / comment / click</li>
@@ -521,103 +564,9 @@
           <h4 data-i18n="fit_title">Best fits</h4>
           <ul>
             <li data-i18n="fit_1">Music releases & dance challenges</li>
-            <li data-i18n="fit_2">Beauty products, skincare, makeup</li>
-            <li data-i18n="fit_3">Clothing, fashion accessories, lifestyle</li>
+            <li data-i18n="fit_2">Clothing / fashion accessories</li>
+            <li data-i18n="fit_3">Beauty products, skincare, makeup</li>
           </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="audience">
-      <div class="section-head">
-        <div>
-          <h3 data-i18n="aud_title">Audience & performance</h3>
-          <p data-i18n="aud_sub">Public snapshot (numbers vary over time). TikTok performance based on recent videos.</p>
-        </div>
-      </div>
-
-      <div class="two">
-        <div class="card list">
-          <h4 data-i18n="snap_title">Channel snapshot</h4>
-          <ul>
-            <li data-i18n="snap_1"><strong style="color:var(--text)">TikTok:</strong> 213,099 followers • 143 videos</li>
-            <li data-i18n="snap_2"><strong style="color:var(--text)">Instagram:</strong> 18K followers</li>
-            <li data-i18n="snap_3"><strong style="color:var(--text)">Engagement (TT):</strong> 16.95%</li>
-          </ul>
-        </div>
-        <div class="card list">
-          <h4 data-i18n="avg_title">Recent TikTok averages</h4>
-          <ul>
-            <li data-i18n="avg_1"><strong style="color:var(--text)">Avg views:</strong> 518,127</li>
-            <li data-i18n="avg_2"><strong style="color:var(--text)">Avg likes:</strong> 77,586</li>
-            <li data-i18n="avg_3"><strong style="color:var(--text)">Avg shares / comments:</strong> 9,900 / 345</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="work">
-      <div class="section-head">
-        <div>
-          <h3 data-i18n="work_title">Selected collaborations</h3>
-          <p data-i18n="work_sub"><strong>Big collabs:</strong> Gleglow Contacts and Block Blast.</p>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="brand-grid">
-
-          <!-- Gleglow -->
-          <div class="brand-card">
-            <div class="brand-img" aria-hidden="true">
-              <svg viewBox="0 0 64 64" role="img" aria-label="Gleglow">
-                <defs>
-                  <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0" stop-color="#ff4fa3"/>
-                    <stop offset="1" stop-color="#ffb3d6"/>
-                  </linearGradient>
-                </defs>
-                <rect x="0" y="0" width="64" height="64" rx="18" fill="url(#g1)"/>
-                <circle cx="32" cy="34" r="15" fill="rgba(255,255,255,.75)"/>
-                <circle cx="32" cy="34" r="7" fill="rgba(139,92,246,.22)"/>
-                <text x="32" y="18" text-anchor="middle" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="900" fill="white">GLEGLOW</text>
-              </svg>
-            </div>
-            <div class="brand-meta">
-              <b>Gleglow Contacts</b>
-              <span data-i18n="gleglow_sub">Beauty / lenses</span>
-            </div>
-            <div class="brand-actions">
-              <a class="btn secondary" href="https://gleglow.com/" target="_blank" rel="noreferrer" data-i18n="visit_site">Website</a>
-            </div>
-          </div>
-
-          <!-- Block Blast -->
-          <div class="brand-card">
-            <div class="brand-img" aria-hidden="true">
-              <svg viewBox="0 0 64 64" role="img" aria-label="Block Blast">
-                <defs>
-                  <linearGradient id="b1" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0" stop-color="#8b5cf6"/>
-                    <stop offset="1" stop-color="#ffb3d6"/>
-                  </linearGradient>
-                </defs>
-                <rect x="0" y="0" width="64" height="64" rx="18" fill="url(#b1)"/>
-                <rect x="14" y="18" width="16" height="16" rx="4" fill="rgba(255,255,255,.85)"/>
-                <rect x="34" y="18" width="16" height="16" rx="4" fill="rgba(255,255,255,.70)"/>
-                <rect x="14" y="38" width="36" height="12" rx="4" fill="rgba(255,255,255,.80)"/>
-                <text x="32" y="14" text-anchor="middle" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="900" fill="white">BLOCK BLAST</text>
-              </svg>
-            </div>
-            <div class="brand-meta">
-              <b>Block Blast</b>
-              <span data-i18n="block_sub">Mobile game / app promo</span>
-            </div>
-            <div class="brand-actions">
-              <a class="btn secondary" href="https://blockblast.org/" target="_blank" rel="noreferrer" data-i18n="visit_site">Website</a>
-            </div>
-          </div>
-
         </div>
       </div>
     </section>
@@ -742,7 +691,7 @@
           <div class="field">
             <span aria-hidden="true">🔗</span>
             <span data-i18n="label_mediakit">Media kit:</span>
-            <code id="linkText">https://yourdomain.com/sini_1219</code>
+            <code id="linkText">https://sini1219.github.io/</code>
           </div>
           <button class="btn secondary" id="copyUrlBtn" type="button" data-i18n="copy_btn">Copy</button>
         </div>
@@ -833,24 +782,20 @@
     const i18n = {
       en: {
         nav_about: "About",
-        nav_audience: "Audience",
-        nav_work: "Work",
         nav_videos: "Videos",
         nav_rates: "Rates",
         nav_contact: "Contact",
         nav_book: "Book a collab 💗",
 
-        pill_niche_label: "Niche:",
-        pill_niche_val: "Dance / Performance / Beauty",
-        pill_plus_label: "Plus:",
-        pill_plus_val: "Cosplay-style looks (optional)",
         pill_location_label: "Based in:",
         pill_location_val: "South Korea",
         pill_platforms_label: "Platforms:",
         pill_platforms_val: "TikTok + Instagram",
+        pill_lang_label: "Languages:",
+        pill_lang_val: "English / Korean",
 
-        hero_title: "Dance-first content brands can’t ignore.",
-        hero_lead: "Sini creates high-energy dance content with a cute beauty/lifestyle edge — designed for saves, shares, strong hooks, and brand recall. Cosplay-inspired concepts available when it fits the campaign.",
+        hero_title: "Meet Sini 💗",
+        hero_lead: "Hi! I’m Sini — a 21-year-old TikTok & Instagram creator based in South Korea. I post high-energy dance content with a cute beauty vibe, and I can also do cosplay-style concepts when it fits the campaign.",
 
         cta_videos: "See featured videos ✨",
         cta_rates: "View rates",
@@ -859,8 +804,8 @@
         profile_role: "TikTok + Instagram Creator",
         profile_based_label: "Based in:",
         profile_based_val: "South Korea",
-        profile_reply_label: "Reply in:",
-        profile_reply_val: "< 24 hours",
+        profile_lang_label: "Languages:",
+        profile_lang_val: "English / Korean",
 
         stat_total: "Total followers (TT + IG)",
         stat_er: "TikTok engagement rate",
@@ -874,35 +819,18 @@
         cap_cos: "🎀 Cosplay / beauty vibe",
 
         about_title: "About",
-        about_sub: "Dance-led short-form with strong hooks, cute styling, and trend-aware choreography.",
+        about_sub: "Short-form content made for music, clothing, beauty, and lifestyle brands.",
+
         get_title: "What you get",
-        get_1: "Native TikTok-style storytelling + choreography",
+        get_1: "Trend-led dance content with strong hooks",
         get_2: "Clean, girly visuals + editing that fits trends",
         get_3: "Optional cosplay-inspired concepts (when relevant)",
         get_4: "Clear CTA options: save / share / comment / click",
 
         fit_title: "Best fits",
         fit_1: "Music releases & dance challenges",
-        fit_2: "Beauty products, skincare, makeup",
-        fit_3: "Clothing, fashion accessories, lifestyle",
-
-        aud_title: "Audience & performance",
-        aud_sub: "Public snapshot (numbers vary over time). TikTok performance based on recent videos.",
-        snap_title: "Channel snapshot",
-        snap_1: "<strong style=\"color:var(--text)\">TikTok:</strong> 213,099 followers • 143 videos",
-        snap_2: "<strong style=\"color:var(--text)\">Instagram:</strong> 18K followers",
-        snap_3: "<strong style=\"color:var(--text)\">Engagement (TT):</strong> 16.95%",
-
-        avg_title: "Recent TikTok averages",
-        avg_1: "<strong style=\"color:var(--text)\">Avg views:</strong> 518,127",
-        avg_2: "<strong style=\"color:var(--text)\">Avg likes:</strong> 77,586",
-        avg_3: "<strong style=\"color:var(--text)\">Avg shares / comments:</strong> 9,900 / 345",
-
-        work_title: "Selected collaborations",
-        work_sub: "<strong>Big collabs:</strong> Gleglow Contacts and Block Blast.",
-        gleglow_sub: "Beauty / lenses",
-        block_sub: "Mobile game / app promo",
-        visit_site: "Website",
+        fit_2: "Clothing / fashion accessories",
+        fit_3: "Beauty products, skincare, makeup",
 
         vid_title: "Featured videos",
         vid_sub: "Two embeds to keep the page fast.",
@@ -941,24 +869,20 @@
 
       kr: {
         nav_about: "소개",
-        nav_audience: "오디언스",
-        nav_work: "협업",
         nav_videos: "영상",
         nav_rates: "단가",
         nav_contact: "연락",
         nav_book: "콜라보 문의 💗",
 
-        pill_niche_label: "분야:",
-        pill_niche_val: "댄스 / 퍼포먼스 / 뷰티",
-        pill_plus_label: "추가:",
-        pill_plus_val: "코스프레 느낌 (옵션)",
         pill_location_label: "활동 지역:",
         pill_location_val: "대한민국",
         pill_platforms_label: "플랫폼:",
         pill_platforms_val: "틱톡 + 인스타그램",
+        pill_lang_label: "언어:",
+        pill_lang_val: "영어 / 한국어",
 
-        hero_title: "브랜드가 주목하는 댄스 중심 콘텐츠.",
-        hero_lead: "시니는 트렌드에 맞는 고에너지 댄스 콘텐츠를 제작합니다. 뷰티/라이프스타일 감성을 더해 저장·공유를 유도하고 브랜드 인지에 도움을 줍니다. 캠페인에 맞는 경우 코스프레 컨셉도 가능합니다.",
+        hero_title: "시니를 소개합니다 💗",
+        hero_lead: "안녕하세요! 저는 대한민국에서 활동하는 21살 크리에이터 시니입니다. 틱톡과 인스타그램에서 고에너지 댄스 콘텐츠를 만들고, 뷰티 무드와 러블리한 분위기를 살려요. 캠페인에 맞는 경우 코스프레 컨셉도 가능합니다.",
 
         cta_videos: "대표 영상 보기 ✨",
         cta_rates: "단가 보기",
@@ -967,8 +891,8 @@
         profile_role: "틱톡 + 인스타그램 크리에이터",
         profile_based_label: "활동 지역:",
         profile_based_val: "대한민국",
-        profile_reply_label: "답장:",
-        profile_reply_val: "24시간 이내",
+        profile_lang_label: "언어:",
+        profile_lang_val: "영어 / 한국어",
 
         stat_total: "총 팔로워 (TT + IG)",
         stat_er: "틱톡 참여율",
@@ -982,35 +906,18 @@
         cap_cos: "🎀 코스프레 / 뷰티 무드",
 
         about_title: "소개",
-        about_sub: "강한 훅과 트렌드 안무, 러블리한 스타일링의 숏폼 콘텐츠.",
+        about_sub: "음원, 의류/패션, 뷰티, 라이프스타일 브랜드에 맞춘 숏폼 콘텐츠.",
+
         get_title: "제공 내용",
-        get_1: "틱톡 네이티브 스토리텔링 + 안무",
+        get_1: "트렌드에 맞는 댄스 콘텐츠 + 강한 훅",
         get_2: "깔끔한 비주얼 + 트렌드 편집",
         get_3: "캠페인에 맞는 코스프레 컨셉(옵션)",
         get_4: "저장/공유/댓글/클릭 유도 CTA",
 
         fit_title: "추천 카테고리",
         fit_1: "음원 발매 & 댄스 챌린지",
-        fit_2: "뷰티 제품, 스킨케어, 메이크업",
-        fit_3: "의류/패션 소품/라이프스타일",
-
-        aud_title: "오디언스 & 성과",
-        aud_sub: "공개 지표(변동 가능). 최근 영상 기준.",
-        snap_title: "채널 현황",
-        snap_1: "<strong style=\"color:var(--text)\">틱톡:</strong> 팔로워 213,099 • 영상 143개",
-        snap_2: "<strong style=\"color:var(--text)\">인스타그램:</strong> 팔로워 18K",
-        snap_3: "<strong style=\"color:var(--text)\">참여율(틱톡):</strong> 16.95%",
-
-        avg_title: "최근 평균(틱톡)",
-        avg_1: "<strong style=\"color:var(--text)\">평균 조회수:</strong> 518,127",
-        avg_2: "<strong style=\"color:var(--text)\">평균 좋아요:</strong> 77,586",
-        avg_3: "<strong style=\"color:var(--text)\">공유/댓글:</strong> 9,900 / 345",
-
-        work_title: "주요 협업",
-        work_sub: "<strong>대형 협업:</strong> Gleglow Contacts, Block Blast.",
-        gleglow_sub: "뷰티 / 렌즈",
-        block_sub: "모바일 게임 / 앱 프로모션",
-        visit_site: "웹사이트",
+        fit_2: "의류/패션 소품",
+        fit_3: "뷰티 제품, 스킨케어, 메이크업",
 
         vid_title: "대표 영상",
         vid_sub: "빠른 로딩을 위해 2개만 임베드했습니다.",
@@ -1057,13 +964,8 @@
         const key = el.getAttribute('data-i18n');
         if(!dict[key]) return;
 
-        // allow HTML for some list items
-        if (el.tagName === 'LI' || el.tagName === 'P' || el.tagName === 'SPAN' || el.tagName === 'A' || el.tagName === 'H3' || el.tagName === 'H1' || el.tagName === 'H4' || el.tagName === 'BUTTON') {
-          if (dict[key].includes('<strong')) el.innerHTML = dict[key];
-          else el.textContent = dict[key];
-        } else {
-          el.textContent = dict[key];
-        }
+        if (dict[key].includes('<strong')) el.innerHTML = dict[key];
+        else el.textContent = dict[key];
       });
 
       document.getElementById('langEN').setAttribute('aria-pressed', String(lang === 'en'));
@@ -1074,7 +976,60 @@
     document.getElementById('langEN').addEventListener('click', () => setLang('en'));
     document.getElementById('langKR').addEventListener('click', () => setLang('kr'));
 
-    // default
+    // Copy buttons
+    async function copyText(text){
+      try{
+        await navigator.clipboard.writeText(text);
+        toast(currentLang === 'kr' ? '복사됨 💗' : 'Copied 💗');
+      }catch(err){
+        const t = document.createElement('textarea');
+        t.value = text;
+        t.setAttribute('readonly','');
+        t.style.position = 'absolute';
+        t.style.left = '-9999px';
+        document.body.appendChild(t);
+        t.select();
+        document.execCommand('copy');
+        document.body.removeChild(t);
+        toast(currentLang === 'kr' ? '복사됨 💗' : 'Copied 💗');
+      }
+    }
+    document.getElementById('copyEmailBtn').addEventListener('click', () => {
+      copyText(document.getElementById('emailText').textContent.trim());
+    });
+    document.getElementById('copyUrlBtn').addEventListener('click', () => {
+      copyText(document.getElementById('linkText').textContent.trim());
+    });
+
+    // Tiny toast
+    let toastTimer;
+    function toast(msg){
+      clearTimeout(toastTimer);
+      let el = document.getElementById('toast');
+      if(!el){
+        el = document.createElement('div');
+        el.id = 'toast';
+        el.style.position = 'fixed';
+        el.style.left = '50%';
+        el.style.bottom = '18px';
+        el.style.transform = 'translateX(-50%)';
+        el.style.padding = '10px 12px';
+        el.style.borderRadius = '999px';
+        el.style.border = '1px solid rgba(35,18,26,.16)';
+        el.style.background = 'rgba(255,255,255,.88)';
+        el.style.color = '#23121a';
+        el.style.font = '900 13px ui-sans-serif, system-ui';
+        el.style.backdropFilter = 'blur(10px)';
+        el.style.zIndex = '9999';
+        document.body.appendChild(el);
+      }
+      el.textContent = msg;
+      el.style.opacity = '1';
+      toastTimer = setTimeout(() => { el.style.opacity = '0'; }, 1400);
+    }
+
+    // Footer year + default lang
+    document.getElementById('year').textContent = new Date().getFullYear();
     setLang('en');
   </script>
 </body>
